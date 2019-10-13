@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+
+- script: |
+    pip install -r requirements-core.txt
+    pip install -r requirements-test.txt
+  displayName: 'Install requirements'
+
+- script: |
+    pytest -vv project_name/tests/
+  displayName: 'Run Pytest'
