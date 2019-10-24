@@ -4,16 +4,29 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  DOCKER_IMAGE: jakakokosar/image-comments:1.0.0
+
 steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.7'
 
-- script: |
-    pip install -r requirements-core.txt
-    pip install -r requirements-test.txt
-  displayName: 'Install requirements'
+- bash: docker build -t $(DOCKER_IMAGE) .
+  displayName: 'Build docker image'
 
-- script: |
-    pytest -vv project_name/tests/
-  displayName: 'Run Pytest'
+- bash: echo $(DOCKER_PASSWORD) | docker login -u $(DOCKER_USERNAME) --password-stdin
+  displayName: 'Login to docker hub'
+
+- bash: sudo docker push $(DOCKER_IMAGE)
+  displayName: 'Push image to docker hub'
+
+
+#- script: |
+#    pip install -r requirements-core.txt
+#    pip install -r requirements-test.txt
+#  displayName: 'Install requirements'
+#
+#- script: |
+#    pytest -vv project_name/tests/
+#  displayName: 'Run Pytest'

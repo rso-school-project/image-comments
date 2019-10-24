@@ -1,2 +1,4 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
-COPY ./project_name /project_name/app
+COPY requirements-core.txt /requirements-core.txt
+RUN pip install -U -r /requirements-core.txt pip
+COPY image_comments /app/image_comments
