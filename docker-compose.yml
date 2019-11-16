@@ -9,7 +9,9 @@ services:
     ports: 
       - "80:80"
     environment:
-      - MODULE_NAME=image_comments.main
+      - MODULE_NAME=image_comments
+      - ETCD_HOST=etcd
+      - ETCD_PORT=2379
     depends_on:
       - etcd
 
