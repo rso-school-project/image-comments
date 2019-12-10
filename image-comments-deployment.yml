@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-comments
+  namespace: rso
+  labels:
+    app: image-comments
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-comments
+  template:
+    metadata:
+      labels:
+        app: image-comments
+    spec:
+      containers:
+      - image: jakakokosar/image-comments:1.1.0
+        name: image-comments
+        env:
+          - name: MODULE_NAME
+            value: image_comments
+        livenessProbe:
+          httpGet:
+            path: /health/live
+          initialDelaySeconds: 20
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+          initialDelaySeconds: 20
+          periodSeconds: 3
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-comments-service
+  namespace: rso
+  labels:
+    app: image-comments
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8001
+      protocol: TCP
+  selector:
+    app: image-comments
