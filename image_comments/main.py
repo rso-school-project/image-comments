@@ -18,11 +18,11 @@ app = FastAPI(
 
 
 app.add_middleware(PrometheusMiddleware)
-app.add_route(f'{PREFIX}/metrics/', metrics)
+app.add_route('/metrics/', metrics)
 
 app.include_router(
     comments.router, prefix=PREFIX, responses={404: {'description': 'Not found'}},
 )
 
-app.add_route(f'{PREFIX}/health/live', check_liveness)
-app.add_route(f'{PREFIX}/health/ready', check_readiness)
+app.add_route('/health/live', check_liveness)
+app.add_route('/health/ready', check_readiness)
