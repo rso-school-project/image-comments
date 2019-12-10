@@ -22,6 +22,8 @@ spec:
         env:
           - name: MODULE_NAME
             value: image_comments
+          - name: PORT
+            value: "8001"
         ports:
           - containerPort: 8001
             name: server
