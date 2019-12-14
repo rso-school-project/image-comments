@@ -51,7 +51,7 @@ metadata:
   labels:
     app: image-comments
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 8001
       protocol: TCP
