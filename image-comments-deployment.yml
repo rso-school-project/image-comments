@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: image-comments
-  namespace: rso
+#  namespace: rso
   labels:
     app: image-comments
 
@@ -17,7 +17,7 @@ spec:
         app: image-comments
     spec:
       containers:
-      - image: jakakokosar/image-comments:1.1.0
+      - image: jakakokosar/image-comments:1.1.1
         name: image-comments
         env:
           - name: MODULE_NAME
@@ -47,7 +47,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: image-comments-service
-  namespace: rso
+#  namespace: rso
   labels:
     app: image-comments
 spec:
