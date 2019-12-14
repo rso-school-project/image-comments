@@ -1,9 +1,13 @@
 import uuid
-
+import time
 # import logging
 
 from fastapi import APIRouter
+from func_timeout import func_set_timeout
+
+
 from image_comments import settings
+from image_comments.utils import fallback
 
 # import json_log_formatter
 
@@ -48,3 +52,15 @@ def list_comments():
     # logger.info("THIS IS A INFO LOG", extra={'a': 1})
 
     return comment_generator()
+
+
+def test_fallback():
+    return {'Detail': 'This is fallback function. Request timed-out'}
+
+
+@router.get('/timeout/{seconds}')
+@fallback(fallback_function=test_fallback)
+@func_set_timeout(3)
+def test_timeout_feature(seconds: str):
+    time.sleep(float(seconds))
+    return {'Timeout': seconds, 'Detail': 'Request did not time-out.'}
