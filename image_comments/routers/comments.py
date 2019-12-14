@@ -33,7 +33,7 @@ def comment_generator():
 
 
 # ordering of decorators is very important
-@router.get('/')
+@router.get('/comments')
 def list_comments():
     # logger.info('function1 has executed',
     #         extra={

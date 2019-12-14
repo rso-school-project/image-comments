@@ -6,7 +6,7 @@ from .utils import check_liveness, check_readiness
 
 VERSION = '1.1.0'
 API_VERSION = 'v1'
-PREFIX = f'/api/{API_VERSION}/comments'
+PREFIX = f'/api/{API_VERSION}'
 
 
 app = FastAPI(
