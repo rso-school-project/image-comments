@@ -34,21 +34,21 @@ spec:
           - name: PORT
             value: "8001"
           - name: ETCD_HOST_URL
-              value: "etcd"
+            value: "etcd"
           - name: ETCD_HOST_PORT
-              value: "2379"
+            value: "2379"
           - name: DB_URL
-              value: "10.32.192.3"
+            value: "10.32.192.3"
           - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: db-user-pass
-                  key: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: db-user-pass
+                key: DB_USERNAME
           - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: db-user-pass
-                  key: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-user-pass
+                key: DB_PASSWORD
         ports:
           - containerPort: 8001
             name: server
