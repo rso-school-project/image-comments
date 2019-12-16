@@ -9,19 +9,10 @@ from sqlalchemy.orm import Session
 
 from image_comments import settings
 from image_comments.utils import fallback
-from image_comments.database import crud, models, schemas
+from image_comments.database import crud, models, schemas, get_db
 from image_comments.database import SessionLocal, engine
 
-models.Base.metadata.create_all(bind=engine, checkfirst=True)
-
-
-# Dependency
-def get_db():
-    try:
-        db = SessionLocal()
-        yield db
-    finally:
-        db.close()
+# models.Base.metadata.create_all(bind=engine, checkfirst=True)
 
 
 router = APIRouter()
