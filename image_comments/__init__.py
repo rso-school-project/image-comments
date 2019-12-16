@@ -1,7 +1,7 @@
 import os
 import etcd3
 
-VERSION = '1.1.1'
+VERSION = '1.2.0'
 MODULE = 'image_comments'
 API_VERSION = 'v1'
 PREFIX = f'/api/{API_VERSION}'
