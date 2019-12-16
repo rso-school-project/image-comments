@@ -6,12 +6,12 @@ MODULE = 'image_comments'
 API_VERSION = 'v1'
 PREFIX = f'/api/{API_VERSION}'
 
-ETCD_HOST = os.environ.get('ETCD_HOST', 'etcd')
-ETCD_PORT = os.environ.get('ETCD_PORT', '2379')
+ETCD_HOST_URL = os.environ.get('ETCD_HOST_URL', 'etcd')
+ETCD_HOST_PORT = os.environ.get('ETCD_HOST_PORT', '2379')
 
 
 try:
-    etcd = etcd3.client(host=ETCD_HOST, port=ETCD_PORT)
+    etcd = etcd3.client(host=ETCD_HOST_URL, port=ETCD_HOST_PORT)
     etcd.status()
 except etcd3.exceptions.ConnectionFailedError:
     # Raise warning that etcd connection failed.
