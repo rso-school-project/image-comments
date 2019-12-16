@@ -1,6 +1,10 @@
 import os
 import etcd3
 
+VERSION = '1.1.1'
+MODULE = 'image_comments'
+API_VERSION = 'v1'
+PREFIX = f'/api/{API_VERSION}'
 
 ETCD_HOST = os.environ.get('ETCD_HOST', 'etcd')
 ETCD_PORT = os.environ.get('ETCD_PORT', '2379')
