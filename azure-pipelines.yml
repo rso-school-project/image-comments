@@ -10,7 +10,7 @@ variables:
 
   # script variable
   - name: DOCKER_IMAGE
-    value: 'jakakokosar/image-comments:1.3.0'
+    value: 'jakakokosar/image-comments:1.4.0'
 
 steps:
 - task: UsePythonVersion@0
