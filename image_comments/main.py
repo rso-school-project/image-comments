@@ -23,7 +23,7 @@ app = FastAPI(
 @app.get('/docs', include_in_schema=False)
 async def custom_swagger_ui_html():
     return get_swagger_ui_html(
-        openapi_url=f'http://34.65.148.232/{app.title + app.openapi_url}',
+        openapi_url=f'https://34.65.148.232/{app.title + app.openapi_url}',
         # openapi_url=f'/{app.title + app.openapi_url}',
         title=app.title + ' - Swagger UI'
     )
