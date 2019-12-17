@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.openapi.docs import get_swagger_ui_html
 from starlette_prometheus import metrics, PrometheusMiddleware
 from starlette.requests import Request
 
@@ -13,12 +14,21 @@ app = FastAPI(
     title='image-comments',
     description='Microservice for handling image comments',
     version=VERSION,
-    openapi_prefix='image-comments',
-    openapi_url=f'{PREFIX}/openapi.json',
+    openapi_url='/openapi.json',
+    docs_url=None,
+    redoc_url=None
 )
 
 
-@app.middleware("http")
+@app.get('/docs', include_in_schema=False)
+async def custom_swagger_ui_html():
+    return get_swagger_ui_html(
+        openapi_url=app.title + app.openapi_url,
+        title=app.title + ' - Swagger UI'
+    )
+
+
+@app.middleware('http')
 async def logger_middleware(request: Request, call_next):
     path = PrometheusMiddleware.get_path_template(request)
     logger.info(f'{path} ENTRY', extra={'unique_log_id': request.headers.get('unique_log_id', 'Not provided')})
