@@ -13,7 +13,7 @@ app = FastAPI(
     title='image-comments',
     description='Microservice for handling image comments',
     version=VERSION,
-    openapi_url=f'/image-comments/{PREFIX}/openapi.json',
+    openapi_url=f'/image-comments{PREFIX}/openapi.json',
 )
 
 

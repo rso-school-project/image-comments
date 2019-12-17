@@ -9,16 +9,13 @@ from sqlalchemy.orm import Session
 
 from image_comments import settings
 from image_comments.utils import fallback
-from image_comments.database import crud, models, schemas, get_db
-from image_comments.database import SessionLocal, engine
+from image_comments.database import crud, models, schemas, get_db, engine
 
-# models.Base.metadata.create_all(bind=engine, checkfirst=True)
-
-
+models.Base.metadata.create_all(bind=engine, checkfirst=True)
 router = APIRouter()
 
 
-@router.get('/comments/', response_model=List[schemas.Comment])
+@router.get('/comments', response_model=List[schemas.Comment])
 def read_users(request: Request, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     # NOTE: this is importat for logging.
     #       we get unique_log_id as a header in request object.
