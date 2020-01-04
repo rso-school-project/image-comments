@@ -17,12 +17,19 @@ router = APIRouter()
 
 @router.get('/comments', response_model=List[schemas.Comment])
 def read_users(request: Request, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    # NOTE: this is importat for logging.
-    #       we get unique_log_id as a header in request object.
-    #       unique_log_id = request.header.get('unique_log_id')
-    #       Use this log id, when calling another microservice from here.
-    users = crud.get_comments(db, skip=skip, limit=limit)
-    return users
+    comments = crud.get_comments(db, skip=skip, limit=limit)
+    return comments
+
+
+@router.get('/comments/image/{image_id}', response_model=List[schemas.Comment])
+def read_users_by_image(request: Request, image_id: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    comments = crud.get_comments_by_image(db, image_id=image_id)
+    return comments
+
+
+@router.post('/comments', response_model=schemas.Comment)
+def create_user(comment: schemas.CommentCreate, db: Session = Depends(get_db)):
+    return crud.create_comment(db=db, comment=comment)
 
 
 @router.get('/settings')
