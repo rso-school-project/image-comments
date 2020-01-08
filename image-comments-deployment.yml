@@ -21,7 +21,7 @@ spec:
           secret:
             secretName: google-cloud-key
       containers:
-      - image: jakakokosar/image-comments:1.4.5
+      - image: jakakokosar/image-comments:1.5.0
         name: image-comments
         volumeMounts:
           - name: google-cloud-key
